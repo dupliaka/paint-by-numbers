@@ -1,0 +1,8 @@
+/target
+/local
+
+# IntelliJ
+.idea
+*.ipr
+*.iws
+*.iml
