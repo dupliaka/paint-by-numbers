@@ -1,5 +1,6 @@
-##Draw a painting by numbers
+# Draw a painting by numbers
 
+![example](https://github.com/dupliaka/paint-by-numbers/blob/master/example.png?raw=true)
 This application splits your picture by color segments 
 by [this](https://link.springer.com/article/10.1023%2FB%3AVISI.0000022288.19776.77)
 method and enumerates each segment by 27 available colors
@@ -7,7 +8,7 @@ method and enumerates each segment by 27 available colors
 Required:
 * [Java 1.8](https://openjdk.java.net/)
 * [Maven 3.6](http://maven.apache.org/)
-* [Git](http://help.github.com/git-installation-redirect)
+* [Git 2.25](http://help.github.com/git-installation-redirect)
 
 To clone repo 
 ```shell
