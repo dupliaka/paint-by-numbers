@@ -14,106 +14,10 @@
   <dependencies>
     <dependency>
       <groupId>org.openimaj</groupId>
-      <artifactId>audio-processing</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>demos</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>core-hadoop</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>faces</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>image-annotation</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
       <artifactId>image-feature-extraction</artifactId>
       <version>${openimaj.version}</version>
       <scope>compile</scope>
     </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>image-local-features</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>image-processing</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>clustering</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>nearest-neighbour</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>klt-tracker</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>video-processing</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>xuggle-video</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.openimaj</groupId>
-      <artifactId>common-stream</artifactId>
-      <version>${openimaj.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <!-- <dependency>
-			<groupId>org.openimaj</groupId>
-			<artifactId>core-web</artifactId>
-			<version>${openimaj.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.openimaj</groupId>
-			<artifactId>readability4j</artifactId>
-			<version>${openimaj.version}</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.openimaj</groupId>
-			<artifactId>webpage-analysis</artifactId>
-			<version>${openimaj.version}</version>
-			<scope>compile</scope>
-		</dependency> -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -134,34 +38,32 @@
   <build>
     <plugins>
       <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2.1</version>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <mainClass>org.App</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/${project.build.finalName}.lib</outputDirectory>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.9</version>
+        <artifactId>maven-jar-plugin</artifactId>
         <configuration>
-          <downloadSources>true</downloadSources>
-          <downloadJavadocs>true</downloadJavadocs>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <classpathPrefix>${project.build.finalName}.lib/</classpathPrefix>
+              <mainClass>org.App</mainClass>
+            </manifest>
+          </archive>
         </configuration>
       </plugin>
     </plugins>
